@@ -2,7 +2,6 @@ package com.seraleman.selling_ms.components.saleItem;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "sale_items")
 public class SaleItem {
@@ -10,8 +9,7 @@ public class SaleItem {
     @Id
     private String id;
 
-    @Field(value = "product_id")
-    private String productId;
+    private String product;
 
     private Integer quantity;
 
@@ -25,12 +23,12 @@ public class SaleItem {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getProduct() {
+        return product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {
@@ -49,7 +47,7 @@ public class SaleItem {
         this.price = price;
     }
 
-    public Integer getTotalItemPrice(){
+    public Integer getTotalItemPrice() {
         return this.price * this.quantity;
     }
 
