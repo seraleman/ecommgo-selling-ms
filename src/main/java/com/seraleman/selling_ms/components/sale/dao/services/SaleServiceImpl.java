@@ -1,6 +1,8 @@
 package com.seraleman.selling_ms.components.sale.dao.services;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +62,9 @@ public class SaleServiceImpl implements ISaleService {
     public ResponseEntity<?> create(Sale sale) {
 
         Sale saleNew = null;
-        sale.setDate(LocalDateTime.now());
+        ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("America/Bogota"));
+        LocalDateTime bogotaLocal = zdt.toLocalDateTime();
+        sale.setDate(bogotaLocal);
         try {
             saleNew = saleDao.save(sale);
         } catch (DataAccessException e) {
