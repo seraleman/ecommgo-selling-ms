@@ -85,7 +85,7 @@ public class SaleItemServiceImpl implements ISaleItemService {
 
         try {
             saleItemCurrent.setPrice(saleItem.getPrice());
-            saleItemCurrent.setProductId(saleItem.getProductId());
+            saleItemCurrent.setProduct(saleItem.getProduct());
             saleItemCurrent.setQuantity(saleItem.getQuantity());
             saleItemDao.save(saleItemCurrent);
         } catch (DataAccessException e) {

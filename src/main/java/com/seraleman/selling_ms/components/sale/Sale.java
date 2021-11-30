@@ -1,14 +1,14 @@
 package com.seraleman.selling_ms.components.sale;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.seraleman.selling_ms.components.saleItem.SaleItem;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection = "sales")
 public class Sale {
@@ -16,10 +16,10 @@ public class Sale {
     @Id
     private String id;
 
-    private Date date;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "UTC")
+    private LocalDateTime date;
 
-    @Field(value = "user_id")
-    private String userId;
+    private String user;
 
     @DBRef
     private List<SaleItem> items;
@@ -32,20 +32,20 @@ public class Sale {
         this.id = id;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public List<SaleItem> getItems() {
