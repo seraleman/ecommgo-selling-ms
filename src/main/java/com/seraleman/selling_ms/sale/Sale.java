@@ -1,13 +1,11 @@
-package com.seraleman.selling_ms.components.sale;
+package com.seraleman.selling_ms.sale;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.seraleman.selling_ms.components.saleItem.SaleItem;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "sales")
@@ -19,9 +17,8 @@ public class Sale {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
 
-    private String user;
+    private String userId;
 
-    @DBRef
     private List<SaleItem> items;
 
     public String getId() {
@@ -40,12 +37,12 @@ public class Sale {
         this.date = date;
     }
 
-    public String getUser() {
-        return user;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public List<SaleItem> getItems() {

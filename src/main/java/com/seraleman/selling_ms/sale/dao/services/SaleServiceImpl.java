@@ -1,4 +1,4 @@
-package com.seraleman.selling_ms.components.sale.dao.services;
+package com.seraleman.selling_ms.sale.dao.services;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -6,8 +6,8 @@ import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.seraleman.selling_ms.components.sale.Sale;
-import com.seraleman.selling_ms.components.sale.dao.ISaleDao;
+import com.seraleman.selling_ms.sale.Sale;
+import com.seraleman.selling_ms.sale.dao.ISaleDao;
 import com.seraleman.selling_ms.services.response.IResponseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,7 +90,7 @@ public class SaleServiceImpl implements ISaleService {
 
         try {
             saleCurrent.setDate(sale.getDate());
-            saleCurrent.setUser(sale.getUser());
+            saleCurrent.setUserId(sale.getUserId());
             saleCurrent.setItems(sale.getItems());
 
             saleDao.save(saleCurrent);

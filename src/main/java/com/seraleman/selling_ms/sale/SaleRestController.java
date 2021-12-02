@@ -1,6 +1,6 @@
-package com.seraleman.selling_ms.components.sale;
+package com.seraleman.selling_ms.sale;
 
-import com.seraleman.selling_ms.components.sale.dao.services.ISaleService;
+import com.seraleman.selling_ms.sale.dao.services.ISaleService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("ms/api/sales")
+@RequestMapping("/ms/api/sales")
 public class SaleRestController {
 
     @Autowired

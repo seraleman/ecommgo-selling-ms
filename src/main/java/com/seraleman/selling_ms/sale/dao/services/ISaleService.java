@@ -1,6 +1,6 @@
-package com.seraleman.selling_ms.components.sale.dao.services;
+package com.seraleman.selling_ms.sale.dao.services;
 
-import com.seraleman.selling_ms.components.sale.Sale;
+import com.seraleman.selling_ms.sale.Sale;
 
 import org.springframework.http.ResponseEntity;
 
