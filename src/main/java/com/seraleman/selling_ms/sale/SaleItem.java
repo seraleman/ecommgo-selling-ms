@@ -2,18 +2,18 @@ package com.seraleman.selling_ms.sale;
 
 public class SaleItem {
 
-    private String productId;
+    private String product;
 
     private Integer quantity;
 
     private Integer price;
 
-    public String getProductId() {
-        return productId;
+    public String getProduct() {
+        return product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setProduct(String product) {
+        this.product = product;
     }
 
     public Integer getQuantity() {

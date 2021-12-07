@@ -90,8 +90,9 @@ public class SaleServiceImpl implements ISaleService {
 
         try {
             saleCurrent.setDate(sale.getDate());
-            saleCurrent.setUserId(sale.getUserId());
+            saleCurrent.setUser(sale.getUser());
             saleCurrent.setItems(sale.getItems());
+            saleCurrent.setClosed(sale.getClosed());
 
             saleDao.save(saleCurrent);
         } catch (DataAccessException e) {

@@ -17,9 +17,11 @@ public class Sale {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime date;
 
-    private String userId;
+    private String user;
 
     private List<SaleItem> items;
+
+    private Boolean closed = false;
 
     public String getId() {
         return id;
@@ -37,12 +39,12 @@ public class Sale {
         this.date = date;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUser() {
+        return user;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public List<SaleItem> getItems() {
@@ -51,6 +53,14 @@ public class Sale {
 
     public void setItems(List<SaleItem> items) {
         this.items = items;
+    }
+
+    public Boolean getClosed() {
+        return closed;
+    }
+
+    public void setClosed(Boolean closed) {
+        this.closed = closed;
     }
 
     public Integer getTotalSalePrice() {
