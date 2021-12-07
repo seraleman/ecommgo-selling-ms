@@ -1,6 +1,6 @@
-package com.seraleman.selling_ms.components.sale.dao;
+package com.seraleman.selling_ms.sale.dao;
 
-import com.seraleman.selling_ms.components.sale.Sale;
+import com.seraleman.selling_ms.sale.Sale;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

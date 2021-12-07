@@ -1,10 +1,13 @@
-package com.seraleman.selling_ms.components.saleItem.dao.services;
+package com.seraleman.selling_ms.sale.dao.services;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.seraleman.selling_ms.components.saleItem.SaleItem;
-import com.seraleman.selling_ms.components.saleItem.dao.ISaleItemDao;
+import com.seraleman.selling_ms.sale.Sale;
+import com.seraleman.selling_ms.sale.dao.ISaleDao;
 import com.seraleman.selling_ms.services.response.IResponseService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +16,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SaleItemServiceImpl implements ISaleItemService {
+public class SaleServiceImpl implements ISaleService {
 
     @Autowired
-    private ISaleItemDao saleItemDao;
+    private ISaleDao saleDao;
 
     @Autowired
     private IResponseService response;
@@ -24,96 +27,101 @@ public class SaleItemServiceImpl implements ISaleItemService {
     @Override
     public ResponseEntity<?> list() {
 
-        List<SaleItem> saleItems = new ArrayList<>();
+        List<Sale> sales = new ArrayList<>();
 
         try {
-            saleItems = saleItemDao.findAll();
+            sales = saleDao.findAll();
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
 
-        if (saleItems.size() == 0) {
+        if (sales.size() == 0) {
             return response.empty();
         }
-        return response.list(saleItems);
+        return response.list(sales);
     }
 
     @Override
     public ResponseEntity<?> show(String id) {
 
-        SaleItem saleItem = null;
+        Sale sale = null;
 
         try {
-            saleItem = saleItemDao.findById(id.toString()).orElse(null);
+            sale = saleDao.findById(id.toString()).orElse(null);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
 
-        if (saleItem == null) {
+        if (sale == null) {
             return response.notFound(id.toString());
         }
-        return response.found(saleItem);
+        return response.found(sale);
     }
 
     @Override
-    public ResponseEntity<?> create(SaleItem saleItem) {
+    public ResponseEntity<?> create(Sale sale) {
 
-        SaleItem saleItemNew = null;
-
+        Sale saleNew = null;
+        ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("America/Bogota"));
+        LocalDateTime bogotaLocal = zdt.toLocalDateTime();
+        sale.setDate(bogotaLocal);
         try {
-            saleItemNew = saleItemDao.save(saleItem);
+            saleNew = saleDao.save(sale);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
-        return response.created(saleItemNew);
+        return response.created(saleNew);
     }
 
     @Override
-    public ResponseEntity<?> update(String id, SaleItem saleItem) {
+    public ResponseEntity<?> update(String id, Sale sale) {
 
-        SaleItem saleItemCurrent = null;
+        Sale saleCurrent = null;
 
         try {
-            saleItemCurrent = saleItemDao.findById(id).orElse(null);
+            saleCurrent = saleDao.findById(id).orElse(null);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
 
-        if (saleItemCurrent == null) {
+        if (saleCurrent == null) {
             return response.notFound(id);
         }
 
         try {
-            saleItemCurrent.setPrice(saleItem.getPrice());
-            saleItemCurrent.setProductId(saleItem.getProductId());
-            saleItemCurrent.setQuantity(saleItem.getQuantity());
-            saleItemDao.save(saleItemCurrent);
+            saleCurrent.setDate(sale.getDate());
+            saleCurrent.setUser(sale.getUser());
+            saleCurrent.setItems(sale.getItems());
+            saleCurrent.setClosed(sale.getClosed());
+
+            saleDao.save(saleCurrent);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
-        return response.updated(saleItemCurrent);
+        return response.updated(saleCurrent);
     }
 
     @Override
     public ResponseEntity<?> delete(String id) {
 
-        SaleItem saleItem = null;
+        Sale sale = null;
 
         try {
-            saleItem = saleItemDao.findById(id).orElse(null);
+            sale = saleDao.findById(id).orElse(null);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
 
-        if (saleItem == null) {
+        if (sale == null) {
             return response.notFound(id);
         }
 
         try {
-            saleItemDao.deleteById(id);
+            saleDao.deleteById(id);
         } catch (DataAccessException e) {
             return response.errorDataAccess(e);
         }
         return response.deleted();
     }
+
 }
